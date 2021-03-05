@@ -14,12 +14,16 @@ const projects = [];
 app.get("/projects", (request, response) => {
   // Query params: filter and paginate
   // Parametros de querys, sao passados em formato de query
-  // const { title, owner } = request.query;
+  const { title } = request.query;
+
+  const results = title
+    ? projects.filter((project) => project.title.includes(title))
+    : projects;
 
   // console.log(title);
   // console.log(owner);
 
-  return response.json(projects);
+  return response.json(results);
 });
 
 app.post("/projects", (request, response) => {

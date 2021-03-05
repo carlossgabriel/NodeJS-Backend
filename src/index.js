@@ -11,6 +11,17 @@ app.use(express.json());
 
 const projects = [];
 
+function logRequest(request, response, next) {
+  const { method, url } = request;
+  
+  const logLabel = `[${method.toUpperCase()}] ${url}`;
+  
+  console.log(logLabel);
+  
+  return next();
+}
+app.use(logRequest);
+
 app.get("/projects", (request, response) => {
   // Query params: filter and paginate
   // Parametros de querys, sao passados em formato de query

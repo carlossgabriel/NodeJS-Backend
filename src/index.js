@@ -1,12 +1,12 @@
 const express = require("express");
-
+const cors = require("cors");
 const { uuid, isUuid } = require("uuidv4");
 
 const app = express();
 
 // Para que o express utilize jsons para interpretar o que eh recebido
 // Eh necessário passar para a instancia do app o <app.use.(express.json())>
-
+app.use(cors());
 app.use(express.json());
 
 const projects = [];
@@ -61,6 +61,10 @@ app.post("/projects", (request, response) => {
   return response.json(project);
 });
 
+/**
+ * PUT method
+ * Update an object by the ID informed on the @route
+ */
 app.put("/projects/:id", (request, response) => {
   // Route Params: identify resources to delete, or update
   // Parametros de rotas: verifica na rota se foi passada alguma infomacao como identificador
